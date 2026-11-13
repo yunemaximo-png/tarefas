@@ -12,7 +12,7 @@
     <form method="POST"> <!--seleciona o método HTTP -->
         <input type="text" id="tituloTarefa" name="tituloTarefa">
         <input type="date" id="dataConclusao" name="dataConclusao">
-        <button type="button" onclick="adicionarTarefa()">Adicionar</button>
+        <button type="submit">Adicionar</button>
     </form>
     <!-- <output id="listaTarefas">Nenhuma tarefa cadastrada</output> -->
  
@@ -20,7 +20,9 @@
         {% for tarefa in tarefas_da_pagina %}
             <li>
                 {{ tarefa.titulo_tarefa }} - {{ tarefa.data_conclusao }}
-                <a href="#">Apagar</a>
+                <a href="{{url_for('apagar_id_especificado', id=tarefa.id_tarefa)}}">
+                    Apagar
+                </a>
             </li>
         {% endfor %}
     </ul>
