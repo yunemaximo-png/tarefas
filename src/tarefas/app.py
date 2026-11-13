@@ -19,7 +19,7 @@ def home():
         titulo_form = request.form['tituloTarefa'] # casa com o nome do imput no form
         data_conclusao_form = request.form['dataConclusao'] # casa com o nome do imput no form
 
-        data_corrigida = data_conclusao_form if data_conclusao_form != '' else None
+        data_corrigida = data_conclusao_form or None
 
         #Instanciamos uma nova tarefa com os dados recebidos do form
         tarefa = Tarefa(titulo = titulo_form, data_conclusao=data_corrigida)
@@ -32,13 +32,13 @@ def home():
     tarefas = Tarefa.listarTarefas()
 
     return render_template('base.html', 
-                           titulo_da_pagina='Home', 
+                           titulo_da_pagina='Lista de Tarefas', 
                            tarefas_da_pagina=tarefas
                            )
 
 # Crie uma nova funcionalidade para apagar cada uma das tarefas cadastradas
 @app.route('/delete/<int:id>')
-def apagar_id_especificado(id):
+def apagar_id_especifico(id):
     Tarefa.apagarTarefa(id)
     return redirect('/')
 

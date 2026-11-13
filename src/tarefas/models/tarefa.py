@@ -40,7 +40,7 @@ class Tarefa:
 
     @staticmethod
     def apagarTarefa(id):
-        sql = 'DELETE FROM tarefas Where id_tarefa = %s;'
+        sql = 'DELETE FROM tarefa WHERE id_tarefa = %s;'
         params = (id,)
         with Database() as db:
             db.executar(sql, params)

@@ -20,7 +20,7 @@
         {% for tarefa in tarefas_da_pagina %}
             <li>
                 {{ tarefa.titulo_tarefa }} - {{ tarefa.data_conclusao }}
-                <a href="{{url_for('apagar_id_especificado', id=tarefa.id_tarefa)}}">
+                <a href="{{url_for('apagar_id_especifico', id=tarefa.id_tarefa)}}">
                     Apagar
                 </a>
             </li>
