@@ -42,5 +42,26 @@ def apagar_id_especifico(id):
     Tarefa.apagarTarefa(id)
     return redirect('/')
 
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def atualizar(id):
+    if request.method == 'POST':
+        titulo = request.form['tituloTarefa']
+        data = request.form['dataConclusao'] or None
+        Tarefa.atualizarTarefa(id, titulo, data)
+        return redirect('/')
+    else:
+        tarefas = Tarefa.listarTarefas()
+        tarefa_em_edicao = None
+        
+        for t in tarefas:
+            if t['id_tarefa'] == id:  
+                tarefa_em_edicao = t
+                break
+                
+        return render_template('base.html',
+                               titulo_da_pagina='Editar Tarefa',
+                               tarefas_da_pagina=tarefas,
+                               tarefa_em_edicao=tarefa_em_edicao)
+
 if __name__ == '__main__':
     app.run()

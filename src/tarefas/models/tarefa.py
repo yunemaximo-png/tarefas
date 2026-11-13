@@ -44,7 +44,14 @@ class Tarefa:
         params = (id,)
         with Database() as db:
             db.executar(sql, params)
-    
+
+    @staticmethod
+    def atualizarTarefa(id, titulo, data):
+        sql = 'UPDATE tarefa SET titulo_tarefa = %s, data_conclusao = %s WHERE id_tarefa = %s;'
+        params = (titulo, data, id)
+        with Database() as db:
+            db.executar(sql, params)
+   
  
 # Área 51 (testes)
 #tarefa = Tarefa('Minha nova tarefa')
