@@ -52,7 +52,3 @@ class Tarefa:
         with Database() as db:
             db.executar(sql, params)
    
- 
-# Área 51 (testes)
-#tarefa = Tarefa('Minha nova tarefa')
-#tarefa.salvarTarefa()

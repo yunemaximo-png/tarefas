@@ -17,6 +17,7 @@ class Database:
         self.username = getenv('DB_USER')
         self.password = getenv('DB_PASSWORD')
         self.database = getenv('DB_SCHEMA')
+        self. = getenv('Port')
         self.connection = None
         self.cursor = None
  
@@ -28,7 +29,8 @@ class Database:
                 host = self.host,
                 database = self.database,
                 user = self.username,
-                password = self.password
+                password = self.password,
+                port = self.port
             )
  
             if self.connection.is_connected():
@@ -114,13 +116,3 @@ def init_db(sql_filepath=SQL_PATH):
  
  
  
-# Área 51
-        """
-        Tudo o que for escrito dessa área
-        será lido e executado como string.
-        """
-"""db = Database()
-db.conectar()
-print(db.executar('SELECT * FROM tipos_combustivel;'))
-db.desconectar()
-"""
