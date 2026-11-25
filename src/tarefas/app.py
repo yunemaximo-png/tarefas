@@ -8,23 +8,18 @@ app = Flask(__name__)
 with app.app_context():
     init_db()
 
-@app.route('/test')
-def test():
-    return 'Servidor Online!'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
 
     if request.method == 'POST':  
-        titulo_form = request.form['tituloTarefa'] # casa com o nome do imput no form
-        data_conclusao_form = request.form['dataConclusao'] # casa com o nome do imput no form
+        titulo_form = request.form['tituloTarefa']
+        data_conclusao_form = request.form['dataConclusao'] 
 
         data_corrigida = data_conclusao_form or None
 
-        #Instanciamos uma nova tarefa com os dados recebidos do form
         tarefa = Tarefa(titulo = titulo_form, data_conclusao=data_corrigida)
 
-        # Salvamos a tarefa no banco
         tarefa.salvarTarefa()
 
         return redirect(url_for('home'))
@@ -36,7 +31,6 @@ def home():
                            tarefas_da_pagina=tarefas
                            )
 
-# Crie uma nova funcionalidade para apagar cada uma das tarefas cadastradas
 @app.route('/delete/<int:id>')
 def apagar_id_especifico(id):
     Tarefa.apagarTarefa(id)
@@ -52,7 +46,7 @@ def atualizar(id):
     else:
         tarefas = Tarefa.listarTarefas()
         tarefa_em_edicao = None
-        
+
         for t in tarefas:
             if t['id_tarefa'] == id:  
                 tarefa_em_edicao = t
